@@ -11,7 +11,7 @@ if($Path -eq $null)
 $AuditFileList = @()
 
 Get-ChildItem $Path | ForEach-Object {
-    if(IsBinary.ps1 $_ -eq $true)
+    if(Test-IsBinary.ps1 $_ -eq $true)
     {
         $AuditFileList += $_
         Remove-Item $_
