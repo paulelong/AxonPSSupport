@@ -1,7 +1,7 @@
 param 
 (
-    $DevID,
-    $Path
+    $Path,
+    $DevID
 )
 
 $exdate = Get-Date $ex[$DevID]
@@ -13,6 +13,11 @@ if($exdate -lt $curdate)
     Write-Host "Token has expired $diff ago"
 }
 else {
+    if($DevID -eq $null)
+    {
+        $DevID == $lastdevice
+    }
+
     $diff = $exdate = $curdate
     Write-Host "Token Expires in $diff"
 
@@ -21,5 +26,7 @@ else {
     Write-Host "supw=$($supw[$DevID])"
     Write-Host "========================================================="
     
+    Set-Clipboard -value $sshpw[$DevID] 
+
     scp axuser@$($DevID):$($Path) .
 }
